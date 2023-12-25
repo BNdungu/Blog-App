@@ -75,12 +75,13 @@ exports.updatePost = async (req,res,next) => {
 
 exports.deletePost = async (req,res,next) => {
     try {
-        const post = await Post.findByDelete(req.params.id)
+        const post = await Post.findOneAndDelete(req.params.id)
 
         res.status(200).json({
             status: 'success',
         })
     } catch (error) {
+        console.error(error)
         res.status(400).json({
             status: 'fail'
         })
