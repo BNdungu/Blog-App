@@ -17,6 +17,8 @@ const connectWithRetry = () => {
     )
 }
 
+app.use('/api/v1/posts', postRoter)
+
 app.get('/', (req,res) => {
     res.send('Hello world! my name is Nganga Ndungu')
 })
