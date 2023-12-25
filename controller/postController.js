@@ -79,9 +79,6 @@ exports.deletePost = async (req,res,next) => {
 
         res.status(200).json({
             status: 'success',
-            data: {
-                post
-            }
         })
     } catch (error) {
         res.status(400).json({
