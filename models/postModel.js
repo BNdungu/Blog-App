@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
-    title:{
+    'title':{
         type: String,
         required: [true, "Post must have a title"]
     },
 
-    body:{
+    'body':{
         type: String,
         require: [true, 'Post must have body']
     }
