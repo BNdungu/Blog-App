@@ -13,4 +13,4 @@ const users =  mongoose.Schema({
     }
 })
 
-module.exports = momgoose.model('Accounts',users)
+module.exports = mongoose.model('Accounts',users)

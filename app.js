@@ -20,6 +20,7 @@ const connectWithRetry = () => {
 
 app.use(express.json())
 app.use('/api/v1/posts', postRouter)
+app.use('/api/v1/',usersRouter)
 
 app.get('/', (req,res) => {
     res.send('Hello world! my name is Nganga Ndungu')
