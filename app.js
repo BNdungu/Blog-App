@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const postRoter = require('./routes/postRoutes')
+const postRouter = require('./routes/postRoutes')
+const usersRouter = require('./routes/userRoutes')
 const {MONGO_IP,MONGO_PASSWORD,MONGO_PORT,MONGO_USER} = require('./config/config')
 
 const app = express()
@@ -18,7 +19,7 @@ const connectWithRetry = () => {
 }
 
 app.use(express.json())
-app.use('/api/v1/posts', postRoter)
+app.use('/api/v1/posts', postRouter)
 
 app.get('/', (req,res) => {
     res.send('Hello world! my name is Nganga Ndungu')
