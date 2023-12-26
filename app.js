@@ -34,7 +34,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     httpOnly: true,
-    maxAge: 30000
+    maxAge: 60000
   }
 }))
 app.use(express.json())
