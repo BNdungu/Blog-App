@@ -1,0 +1,22 @@
+version: "3"
+services:
+  blogApp:
+    build: .
+    ports:
+     - "3303:3000"
+    environment:
+     - PORT=3000
+    depends_on:
+      - mongo
+      - redis
+
+  mongodb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=ndungu
+      - MONGO_INITDB_ROOT_PASSWORD=ndungu11
+    volumes:
+      - mongod:/data/db
+    
+volumes:
+  mongod:
