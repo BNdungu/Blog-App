@@ -1,14 +1,14 @@
 version: "3"
 services:
-  blogApp:
+  blog-app:
     build: .
     ports:
      - "3303:3000"
     environment:
      - PORT=3000
     depends_on:
-      - mongo
-      - redis
+      - mongodb
+      # - redis
 
   mongodb:
     image: mongo
