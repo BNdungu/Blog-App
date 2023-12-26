@@ -4,7 +4,6 @@ const postRouter = require('./routes/postRoutes')
 const usersRouter = require('./routes/userRoutes')
 const session = require('express-session')
 const redis = require('redis')
-// let RedisStore = require('connect-redis')(session)
 const {MONGO_IP,MONGO_PASSWORD,MONGO_PORT,MONGO_USER, REDIS_PORT,REDIS_URL,SESSION_SECRET} = require('./config/config')
 const { default: RedisStore } = require('connect-redis')
 
@@ -12,9 +11,8 @@ const app = express()
 let redisClient = redis.createClient({
   host: REDIS_URL,
   port: REDIS_PORT
-
-
 })
+
 const port = process.env.PORT || 3000
 
 const connectWithRetry = () => {
@@ -33,6 +31,8 @@ app.use(session({
   secret: SESSION_SECRET,
   cookie:{
     secure: false,
+    resave: false,
+    saveUninitialized: false,
     httpOnly: true,
     maxAge: 30000
   }
