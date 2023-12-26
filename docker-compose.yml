@@ -3,7 +3,7 @@ services:
   blog-app:
     build: .
     ports:
-     - "3303:3000"
+     - "3000:3000"
     environment:
      - PORT=3000
     depends_on:
