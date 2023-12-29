@@ -1,6 +1,6 @@
 const express = require ('express')
+let protect = require('../middleware/authMiddleware')
 const postController = require('../controller/postController')
-const protect = require('../middleware/authMiddleware')
 
 const router = express.Router()
 
@@ -12,4 +12,4 @@ router.route('/:id')
     .patch(postController.updatePost)
     .delete(postController.deletePost)
 
-module.exports = router
+module.exports = router 

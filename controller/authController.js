@@ -43,6 +43,7 @@ exports.login = async (req,res) => {
 
         if (isCorrect){
             req.session.user = loginUser
+            console.log(req.session)
             res.status(201).json({
                 status: 'success',
                 data:{

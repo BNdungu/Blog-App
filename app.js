@@ -1,19 +1,49 @@
 const express = require('express')
+const redis = require('redis')
+const RedisStore = require('connect-redis').default;
 const mongoose = require('mongoose')
 const postRouter = require('./routes/postRoutes')
 const usersRouter = require('./routes/userRoutes')
 const session = require('express-session')
-const redis = require('redis')
 const {MONGO_IP,MONGO_PASSWORD,MONGO_PORT,MONGO_USER, REDIS_PORT,REDIS_URL,SESSION_SECRET} = require('./config/config')
-const { default: RedisStore } = require('connect-redis')
 
 const app = express()
-let redisClient = redis.createClient({
-  host: REDIS_URL,
-  port: REDIS_PORT
+const redisClient = redis.createClient({
+  host: '172.21.0.2',
+  port: 6379
 })
 
+const redisStore = new RedisStore({
+  client: redisClient
+})
+app.use(express.json())
+app.use(session({
+  store: redisStore,
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie:{
+    secure: false,
+    httpOnly: false,
+    maxAge: 1000*60
+  }
+}))
+app.use('/api/v1/posts', postRouter)
+app.use('/api/v1/',usersRouter)
 const port = process.env.PORT || 3000
+
+// const redisClient = redis.createClient({
+//   host: REDIS_URL,
+//   port: REDIS_PORT
+// })
+
+redisClient.on('error', () => {
+  console.error('Couldn\'t establish a connection wit the Redis Server')
+})
+
+redisClient.on('connect', () => {
+  console.log('Connected to the redis Server')
+})
 
 const connectWithRetry = () => {
   mongoose
@@ -26,21 +56,6 @@ const connectWithRetry = () => {
     )
 }
 
-app.use(session({
-  store: new RedisStore({client: redisClient}),
-  secret: SESSION_SECRET,
-  cookie:{
-    secure: false,
-    resave: false,
-    saveUninitialized: false,
-    httpOnly: true,
-    maxAge: 60000
-  }
-}))
-app.use(express.json())
-app.use('/api/v1/posts', postRouter)
-app.use('/api/v1/',usersRouter)
-
 app.get('/', (req,res) => {
     res.send('Hello world! my name is Nganga Ndungu')
 })
@@ -49,7 +64,9 @@ app.get('/docker',(req,res) => {
   res.send('Hello Docker ')  
 })
 
-app.listen(port, () => {
+
+app.listen(port, async () => {
+    await redisClient.connect().catch(console.error)
     console.log(`Server started  to listening at port ${port}`)
 })
 
