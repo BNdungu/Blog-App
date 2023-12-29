@@ -8,9 +8,13 @@ const session = require('express-session')
 const {MONGO_IP,MONGO_PASSWORD,MONGO_PORT,MONGO_USER, REDIS_PORT,REDIS_URL,SESSION_SECRET} = require('./config/config')
 
 const app = express()
+
 const redisClient = redis.createClient({
-  host: '172.21.0.2',
-  port: 6379
+  socket :{
+    host: 'redis-server',
+    port: 6379
+  }
+  
 })
 
 const redisStore = new RedisStore({
@@ -32,13 +36,9 @@ app.use('/api/v1/posts', postRouter)
 app.use('/api/v1/',usersRouter)
 const port = process.env.PORT || 3000
 
-// const redisClient = redis.createClient({
-//   host: REDIS_URL,
-//   port: REDIS_PORT
-// })
-
 redisClient.on('error', () => {
-  console.error('Couldn\'t establish a connection wit the Redis Server')
+  console.error('Couldn\'t complete connection to the Redis Server')
+
 })
 
 redisClient.on('connect', () => {
