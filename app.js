@@ -20,7 +20,10 @@ const redisClient = redis.createClient({
 const redisStore = new RedisStore({
   client: redisClient
 })
+
 app.use(express.json())
+
+app.enable('trust proxy')
 app.use(session({
   store: redisStore,
   secret: 'secret',
@@ -32,6 +35,7 @@ app.use(session({
     maxAge: 1000*60
   }
 }))
+
 app.use('/api/v1/posts', postRouter)
 app.use('/api/v1/',usersRouter)
 const port = process.env.PORT || 3000
