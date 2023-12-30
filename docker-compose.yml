@@ -18,9 +18,9 @@ services:
 
   mongodb:
     image: mongo
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=ndungu
-      - MONGO_INITDB_ROOT_PASSWORD=ndungu11
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=ndungu
+    #   - MONGO_INITDB_ROOT_PASSWORD=ndungu11
     volumes:
       - mongod:/data/db
     
