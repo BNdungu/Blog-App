@@ -23,6 +23,7 @@ services:
     #   - MONGO_INITDB_ROOT_PASSWORD=ndungu11
     volumes:
       - mongod:/data/db
+      - bypass-mongodb_data:/data/db
     
   redis-server:
     image: redis
