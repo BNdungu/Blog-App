@@ -5,7 +5,7 @@ services:
       - "80:80"
   blog-app:
     deploy:
-      replicas: 1
+      replicas: 8
       restart_policy: 
         condition: any
       update_config:
