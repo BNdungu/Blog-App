@@ -31,3 +31,4 @@ services:
 
 volumes:
   mongod:
+  bypass-mongodb_data:
