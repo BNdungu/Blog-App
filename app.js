@@ -18,6 +18,8 @@ const redisClient = redis.createClient({
   
 })
 
+console.log(MONGO_IP,MONGO_PASSWORD,MONGO_PORT,MONGO_USER, REDIS_PORT,REDIS_URL,SESSION_SECRET)
+
 const redisStore = new RedisStore({
   client: redisClient
 })
