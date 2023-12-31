@@ -54,7 +54,7 @@ redisClient.on('connect', () => {
 
 const connectWithRetry = () => {
   mongoose
-  .connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authMechanism=DEFAULT`)
+  .connect(`mongodb://${MONGO_IP}:${MONGO_PORT}/?authMechanism=DEFAULT`)
     .then(() => console.log('Connected to the DB successfully'))
     .catch((error) => {
       console.log(error)
