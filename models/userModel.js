@@ -4,7 +4,7 @@ const users =  mongoose.Schema({
     username:{
         type: String,
         required: [true, 'Please Provide a username'],
-        unique: true. // no repetion of username
+        unique: true.
     },
 
     password:{
