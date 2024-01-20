@@ -74,7 +74,6 @@ app.get('/docker',(req,res) => {
 
 app.listen(port, async () => {
     await redisClient.connect().catch(console.error)
-    console.log(MONGO_IP,MONGO_PASSWORD,MONGO_PORT,MONGO_USER, REDIS_PORT,REDIS_URL,SESSION_SECRET)
     console.log(`Server started  to listening at port ${port}`)
 })
 
