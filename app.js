@@ -13,7 +13,7 @@ const app = express()
 const redisClient = redis.createClient({
   socket :{
     host: REDIS_URL,
-    port: 6379
+    port: 6379 
   }
   
 })
