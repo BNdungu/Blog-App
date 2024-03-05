@@ -25,6 +25,12 @@ pipeline {
       }
     }
 
+    stage('push image') {
+      steps {
+        sh 'docker-compose -f docker-compose.yml -f docker-compose-prod.yml push'
+      }
+    }
+
   }
   environment {
     DOCKERHUB_USER = 'nganga1'
