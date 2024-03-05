@@ -21,7 +21,6 @@ pipeline {
 
     stage('login to dockerhub') {
       steps {
-        sh 'docker-compose -f docker-compose.yml -f docker-compose-prod.yml push'
         sh 'docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD'
       }
     }
