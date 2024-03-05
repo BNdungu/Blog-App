@@ -19,11 +19,16 @@ pipeline {
       }
     }
 
-    stage('push image') {
+    stage('login to dockerhub') {
       steps {
         sh 'docker-compose -f docker-compose.yml -f docker-compose-prod.yml push'
+        sh 'docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD'
       }
     }
 
+  }
+  environment {
+    DOCKERHUB_USER = 'nganga1'
+    DOCKERHUB_PASSWORD = 'dckr_pat_qDU1woD_VpNJmTEnCt1DJ0pICow'
   }
 }
